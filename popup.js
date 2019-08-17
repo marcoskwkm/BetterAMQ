@@ -1,7 +1,11 @@
 const setExtensionStatus = () => {
   chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
     chrome.tabs.sendMessage(tabs[0].id, { type: 'getStatus' }, (response) => {
-      $('#extensionToggle').prop('checked', response.status)
+      if (!chrome.runtime.lastError) {
+        if (response && response.status) {
+          $('#extensionToggle').prop('checked', response.status)
+        }
+      }
     })
   })
 }
