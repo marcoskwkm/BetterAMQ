@@ -1,14 +1,15 @@
 {
   "name": "BetterAMQ",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "A Google Chrome extension for Anime Music Quiz",
   "manifest_version": 2,
   "content_scripts": [
     {
-      "js": ["jquery.min.js", "background.js"],
+      "js": ["jquery.min.js", "background.js", "styles.js"],
       "matches": ["https://animemusicquiz.com/*"]
     }
   ],
+  "web_accessible_resources": ["gameCss.js"],
   "browser_action": {
     "default_popup": "index.html"
   },

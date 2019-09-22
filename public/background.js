@@ -1,17 +1,20 @@
-let extensionIsActive = true
+let status = {
+  tabSwitch: true,
+  customBackground: true,
+}
 
 chrome.runtime.onMessage.addListener(
   (request, sender, sendResponse) => {
     if (request.type === 'getStatus') {
-      sendResponse({ status: extensionIsActive })
+      sendResponse({ status })
     } else if (request.type === 'setStatus') {
-      extensionIsActive = request.status
+      status = Object.assign({}, status, request.status)
     }
   }
 )
 
 document.addEventListener('keyup', e => {
-  if (!extensionIsActive) {
+  if (!status.tabSwitch) {
     return
   }
 
