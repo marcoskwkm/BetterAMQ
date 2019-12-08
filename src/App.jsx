@@ -17,50 +17,25 @@ const App = () => {
   )
 
   useEffect(() => {
-    chrome.tabs && chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
-      chrome.tabs.sendMessage(tabs[0].id, { type: 'getStatus' }, (response) => {
-        if (!chrome.runtime.lastError) {
-          if (response) {
-            setStatus(response.status)
-          }
-        }
-      })
-    })
+    chrome.storage.sync.get(null, (result) => setStatus({
+      tabSwitch: result.tabSwitch || false,
+      customBackground: result.customBackground || false,
+      rankedStats: result.rankedStats || false,
+    }))
   }, [])
 
   const handleTabSwitchToggle = () => {
-    chrome.tabs && chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
-      chrome.tabs.sendMessage(tabs[0].id, {
-        type: 'setStatus',
-        status: {
-          tabSwitch: !status.tabSwitch
-        }
-      })
-    })
+    chrome.storage.sync.set({ tabSwitch: !status.tabSwitch })
     setStatus({ tabSwitch: !status.tabSwitch })
   }
 
   const handleCustomBackgroundToggle = () => {
-    chrome.tabs && chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
-      chrome.tabs.sendMessage(tabs[0].id, {
-        type: 'setStatus',
-        status: {
-          customBackground: !status.customBackground
-        },
-      })
-    })
+    chrome.storage.sync.set({ customBackground: !status.customBackground })
     setStatus({ customBackground: !status.customBackground })
   }
 
   const handleRankedStatsToggle = () => {
-    chrome.tabs && chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
-      chrome.tabs.sendMessage(tabs[0].id, {
-        type: 'setStatus',
-        status: {
-          rankedStats: !status.rankedStats
-        },
-      })
-    })
+    chrome.storage.sync.set({ rankedStats: !status.rankedStats })
     setStatus({ rankedStats: !status.rankedStats })
   }
 
