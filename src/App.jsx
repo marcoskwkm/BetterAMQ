@@ -12,6 +12,7 @@ const App = () => {
     {
       tabSwitch: false,
       customBackground: false,
+      rankedStats: false,
     }
   )
 
@@ -51,6 +52,18 @@ const App = () => {
     setStatus({ customBackground: !status.customBackground })
   }
 
+  const handleRankedStatsToggle = () => {
+    chrome.tabs && chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
+      chrome.tabs.sendMessage(tabs[0].id, {
+        type: 'setStatus',
+        status: {
+          rankedStats: !status.rankedStats
+        },
+      })
+    })
+    setStatus({ rankedStats: !status.rankedStats })
+  }
+
   return (
     <div className="pa2">
       <div className="flex items-center justify-between">
@@ -69,6 +82,15 @@ const App = () => {
           controlled={true}
           onToggle={handleCustomBackgroundToggle}
           checked={status.customBackground}
+        />
+      </div>
+      <div className="flex items-center justify-between">
+        <span>Ranked stats</span>
+        <Toggle
+          name="ranked-stats"
+          controlled={true}
+          onToggle={handleRankedStatsToggle}
+          checked={status.rankedStats}
         />
       </div>
     </div>

@@ -9,7 +9,7 @@
       "matches": ["https://animemusicquiz.com/*"]
     }
   ],
-  "web_accessible_resources": ["gameCss.js"],
+  "web_accessible_resources": ["gameCss.js", "rankedStats.js"],
   "browser_action": {
     "default_popup": "index.html"
   },
