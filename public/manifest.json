@@ -1,6 +1,6 @@
 {
   "name": "BetterAMQ",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A Google Chrome extension for Anime Music Quiz",
   "manifest_version": 2,
   "content_scripts": [
