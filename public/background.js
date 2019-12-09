@@ -1,10 +1,6 @@
 chrome.storage.sync.get('tabSwitch', (result) => {
   if (result.tabSwitch) {
     document.addEventListener('keyup', e => {
-      if (!status.tabSwitch) {
-        return
-      }
-
       if (e.which == 9) {
         const chatInput = $('#gcInput')
         const answerInput = $('#qpAnswerInput')

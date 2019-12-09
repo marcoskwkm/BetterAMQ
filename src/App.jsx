@@ -68,6 +68,7 @@ const App = () => {
           checked={status.rankedStats}
         />
       </div>
+      <div className="pt2">Changes only take effect once you reload the page.</div>
     </div>
   )
 }
